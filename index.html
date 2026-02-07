@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chaymae ED_DRYAF | Développeuse Full Stack</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <!-- Background Effects -->
+    <div class="background-effects">
+        <div class="floating-shapes"></div>
+        <div class="particles-container"></div>
+        <div class="gradient-overlay"></div>
+        <div class="geometric-grid"></div>
+        <div class="floating-circles"></div>
+    </div>
+
+    <!-- Floating Navigation Buttons -->
+    <div class="floating-nav">
+        <button class="floating-btn" data-section="home">
+            <i class="fas fa-home"></i>
+            <span>Accueil</span>
+        </button>
+        <button class="floating-btn" data-section="competences">
+            <i class="fas fa-code"></i>
+            <span>Compétences</span>
+        </button>
+        <button class="floating-btn" data-section="projets">
+            <i class="fas fa-project-diagram"></i>
+            <span>Projets</span>
+        </button>
+        <button class="floating-btn" data-section="contact">
+            <i class="fas fa-envelope"></i>
+            <span>Contact</span>
+        </button>
+    </div>
+
+    <!-- Main Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo-container">
+                <span class="logo-text">C<span class="logo-highlight">E</span></span>
+                <div class="logo-dot"></div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Accueil</a></li>
+                <li><a href="#competences" class="nav-link">Compétences</a></li>
+                <li><a href="#projets" class="nav-link">Projets</a></li>
+                <li><a href="#experience" class="nav-link">Expérience</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="section hero-section active">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text animate-on-scroll">
+                    <div class="badge animate-float">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>bienvenue/Chaymae portefolio</span>
+                    </div>
+                    <h1 class="hero-title">
+                        <span class="text-gradient">Chaymae ED_DRYAF</span>
+                        <span class="typing-text"></span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Jeune développeuse Full Stack passionnée, diplômée en BTS Développement des Systèmes d'Information.
+                        <span class="highlight">Motivée</span>, <span class="highlight">curieuse</span> et dotée d'une forte capacité d'adaptation aux nouvelles technologies. Actuellement en formation JobinTech pour perfectionner mes compétences en développement
+                        web et mobile.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number" data-count="4">0</span>
+                            <span class="stat-label">Projets Clés</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" data-count="5">0</span>
+                            <span class="stat-label">Langues</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" data-count="2">0</span>
+                            <span class="stat-label">Expériences</span>
+                        </div>
+                    </div>
+                    <div class="hero-actions">
+                        <a href="#contact" class="btn btn-primary btn-glow">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Me contacter</span>
+                        </a>
+                        <a href="#projets" class="btn btn-outline">
+                            <i class="fas fa-eye"></i>
+                            <span>Voir mes projets</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual animate-on-scroll delay-1">
+                    <div class="hero-image-container">
+                        <div class="image-wrapper">
+                            <div class="hexagon">
+                                <div class="hexagon-inner">
+                                    <img src="photos/portephoto.jpeg" alt="Chaymae ED_DRYAF" class="hero-image">
+                                </div>
+                                <div class="hexagon-border"></div>
+                            </div>
+                            <div class="image-glow"></div>
+                        </div>
+                        <div class="floating-tech">
+                            <div class="tech-bubble" style="--delay: 0s">
+                                <i class="fab fa-java"></i>
+                            </div>
+                            <div class="tech-bubble" style="--delay: 1s">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <div class="tech-bubble" style="--delay: 2s">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="tech-bubble" style="--delay: 3s">
+                                <i class="fab fa-angular"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compétences Section -->
+    <section id="competences" class="section competences-section">
+        <div class="section-divider wave-divider"></div>
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">
+                    Mes <span class="text-gradient">Compétences</span>
+                </h2>
+                <p class="section-subtitle">
+                    Un profil technique complet combinant développement, gestion de bases de données et soft skills
+                </p>
+            </div>
+
+            <div class="competences-content">
+                <!-- Compétences Techniques -->
+                <div class="competence-category animate-on-scroll">
+                    <h3 class="competence-category-title">
+                        <i class="fas fa-laptop-code"></i> Compétences Techniques
+                    </h3>
+                    <div class="competence-grid">
+                        <div class="competence-card">
+                            <div class="competence-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="competence-info">
+                                <h4>Langages & Frameworks</h4>
+                                <div class="competence-tags">
+                                    <span class="tag">Python</span>
+                                    <span class="tag">Java SpringBoot</span>
+                                    <span class="tag">HTML/CSS</span>
+                                    <span class="tag">JavaScript</span>
+                                    <span class="tag">Angular</span>
+                                    <span class="tag">Bootstrap</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="competence-card">
+                            <div class="competence-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="competence-info">
+                                <h4>Bases de Données</h4>
+                                <div class="competence-tags">
+                                    <span class="tag">MySQL</span>
+                                    <span class="tag">MongoDB</span>
+                                    <span class="tag">PostgreSQL</span>
+                                    <span class="tag">SQL</span>
+                                    <span class="tag">T-SQL</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="competence-card">
+                            <div class="competence-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <div class="competence-info">
+                                <h4>Outils & Technologies</h4>
+                                <div class="competence-tags">
+                                    <span class="tag">Git & GitHub</span>
+                                    <span class="tag">Docker</span>
+                                    <span class="tag">IntelliJ</span>
+                                    <span class="tag">Canvas</span>
+                                    <span class="tag">Linux</span>
+                                    <span class="tag">Windows</span>
+                                    <span class="tag">macOS</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="competence-card">
+                            <div class="competence-icon">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <div class="competence-info">
+                                <h4>Modélisation & Analyse</h4>
+                                <div class="competence-tags">
+                                    <span class="tag">UML</span>
+                                    <span class="tag">Merise</span>
+                                    <span class="tag">Excel</span>
+                                    <span class="tag">Power BI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compétences Comportementales -->
+                <div class="competence-category animate-on-scroll delay-1">
+                    <h3 class="competence-category-title">
+                        <i class="fas fa-users"></i> Compétences Comportementales
+                    </h3>
+                    <div class="soft-skills-grid">
+                        <div class="soft-skill">
+                            <div class="skill-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <h4>Travail d'équipe</h4>
+                            <p>Collaboration efficace et communication claire</p>
+                        </div>
+
+                        <div class="soft-skill">
+                            <div class="skill-icon">
+                                <i class="fas fa-chess-king"></i>
+                            </div>
+                            <h4>Leadership</h4>
+                            <p>Prise d'initiative et sens des responsabilités</p>
+                        </div>
+
+                        <div class="soft-skill">
+                            <div class="skill-icon">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <h4>Gestion de projets</h4>
+                            <p>Organisation et planification efficace</p>
+                        </div>
+
+                        <div class="soft-skill">
+                            <div class="skill-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h4>Résolution de problèmes</h4>
+                            <p>Esprit analytique et capacité d'adaptation</p>
+                        </div>
+
+                        <div class="soft-skill">
+                            <div class="skill-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h4>Communication</h4>
+                            <p>Clarté et efficacité dans les échanges</p>
+                        </div>
+
+                        <div class="soft-skill">
+                            <div class="skill-icon">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <h4>Apprentissage continu</h4>
+                            <p>Curiosité et développement personnel</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Langues -->
+                <div class="competence-category animate-on-scroll delay-2">
+                    <h3 class="competence-category-title">
+                        <i class="fas fa-language"></i> Langues
+                    </h3>
+                    <div class="languages-grid">
+                        <div class="language-card">
+                            <div class="language-flag">
+                                <i class="fas fa-globe-africa"></i>
+                            </div>
+                            <div class="language-info">
+                                <h4>Arabe</h4>
+                                <p>Langue maternelle</p>
+                                <div class="language-level">
+                                    <div class="level-dots">
+                                        <span class="dot active"></span>
+                                        <span class="dot active"></span>
+                                        <span class="dot active"></span>
+                                        <span class="dot active"></span>
+                                        <span class="dot active"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="language-card">
+                            <div class="language-flag">
+                                <i class="fas fa-globe-europe"></i>
+                            </div>
+                            <div class="language-info">
+                                <h4>Français</h4>
+                                <p>Courant</p>
+                                <div class="language-level">
+                                    <div class="level-dots">
+                                        <span class="dot active"></span>
+                                        <span class="dot active"></span>
+                                        <span class="dot active"></span>
+                                        <span class="dot active"></span>
+                                        <span class="dot active"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="language-card">
+                            <div class="language-flag">
+                                <i class="fas fa-globe-americas"></i>
+                            </div>
+                            <div class="language-info">
+                                <h4>Anglais</h4>
+                                <p>Courant</p>
+                                <div class="language-level">
+                                    <div class="level-dots">
+                                        <span class="dot active"></span>
+                                        <span class="dot active"></span>
+                                        <span class="dot active"></span>
+                                        <span class="dot active"></span>
+                                        <span class="dot"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="language-card">
+                            <div class="language-flag">
+                                <i class="fas fa-globe-europe"></i>
+                            </div>
+                            <div class="language-info">
+                                <h4>Allemand</h4>
+                                <p>Courant</p>
+                                <div class="language-level">
+                                    <div class="level-dots">
+                                        <span class="dot active"></span>
+                                        <span class="dot active"></span>
+                                        <span class="dot active"></span>
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projets Section -->
+    <section id="projets" class="section projets-section">
+        <div class="section-divider wave-divider reverse"></div>
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">
+                    Mes <span class="text-gradient">Projets</span> Clés
+                </h2>
+                <p class="section-subtitle">
+                    Réalisations concrètes démontrant mes compétences en développement
+                </p>
+            </div>
+
+            <div class="projets-grid">
+                <div class="projet-card animate-on-scroll">
+                    <div class="projet-image">
+                        <div class="image-overlay">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                    </div>
+                    <div class="projet-content">
+                        <h3 class="projet-title">Système de Gestion d'Usine</h3>
+                        <p class="projet-description">
+                            Application complète pour la gestion des produits finis, matières premières et stocks. Optimisation des processus de production et suivi en temps réel.
+                        </p>
+                        <div class="projet-tech">
+                            <span class="tech-tag">Java SpringBoot</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">Angular</span>
+                        </div>
+                        <div class="projet-features">
+                            <h4>Fonctionnalités :</h4>
+                            <ul>
+                                <li>Gestion des stocks automatisée</li>
+                                <li>Suivi de production en temps réel</li>
+                                <li>Rapports analytiques</li>
+                                <li>Interface administrateur complète</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="projet-card animate-on-scroll delay-1">
+                    <div class="projet-image">
+                        <div class="image-overlay">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
+                    </div>
+                    <div class="projet-content">
+                        <h3 class="projet-title">Application Fitness</h3>
+                        <p class="projet-description">
+                            Plateforme interactive pour le suivi des entraînements et objectifs. Système personnalisé avec notifications et historique des performances.
+                        </p>
+                        <div class="projet-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">React</span>
+                        </div>
+                        <div class="projet-features">
+                            <h4>Fonctionnalités :</h4>
+                            <ul>
+                                <li>Programmes d'entraînement personnalisés</li>
+                                <li>Suivi des performances</li>
+                                <li>Notifications et rappels</li>
+                                <li>Historique complet</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="projet-card animate-on-scroll delay-2">
+                    <div class="projet-image">
+                        <div class="image-overlay">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                    </div>
+                    <div class="projet-content">
+                        <h3 class="projet-title">Plateforme E-commerce</h3>
+                        <p class="projet-description">
+                            Site e-commerce complet avec gestion des produits, utilisateurs et commandes. Interface intuitive et système de paiement sécurisé.
+                        </p>
+                        <div class="projet-tech">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">Bootstrap</span>
+                        </div>
+                        <div class="projet-features">
+                            <h4>Fonctionnalités :</h4>
+                            <ul>
+                                <li>Catalogue produits dynamique</li>
+                                <li>Panier d'achat</li>
+                                <li>Système de paiement</li>
+                                <li>Gestion des commandes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="projet-card animate-on-scroll delay-3">
+                    <div class="projet-image">
+                        <div class="image-overlay">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                    </div>
+                    <div class="projet-content">
+                        <h3 class="projet-title">Site Web Éducatif</h3>
+                        <p class="projet-description">
+                            Plateforme éducative avec interface simple et intuitive pour améliorer l'expérience d'apprentissage. Cours interactifs et suivi de progression.
+                        </p>
+                        <div class="projet-tech">
+                            <span class="tech-tag">HTML/CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Node.js</span>
+                        </div>
+                        <div class="projet-features">
+                            <h4>Fonctionnalités :</h4>
+                            <ul>
+                                <li>Cours interactifs</li>
+                                <li>Quiz et évaluations</li>
+                                <li>Suivi de progression</li>
+                                <li>Interface responsive</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expérience & Formation Section -->
+    <section id="experience" class="section experience-section">
+        <div class="section-divider wave-divider"></div>
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">
+                    Parcours <span class="text-gradient">Professionnel</span>
+                </h2>
+                <p class="section-subtitle">
+                    Expériences et formations qui ont forgé mon expertise
+                </p>
+            </div>
+
+            <div class="timeline">
+                <!-- Formations -->
+                <div class="timeline-category animate-on-scroll">
+                    <h3 class="timeline-category-title">
+                        <i class="fas fa-graduation-cap"></i> Formations
+                    </h3>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025 – En cours</div>
+                        <div class="timeline-content">
+                            <h4>Formation en Développement web et mobile</h4>
+                            <p class="timeline-place">JobInTech | Faculté des Sciences Mènes</p>
+                            <p>Perfectionnement des compétences en développement full stack et mobile</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025</div>
+                        <div class="timeline-content">
+                            <h4>Responsive Web Design</h4>
+                            <p class="timeline-place">FreeCodeCamp</p>
+                            <p>Certification en conception web responsive</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">2023 – 2025</div>
+                        <div class="timeline-content">
+                            <h4>BTS Développement des Systèmes d'Information</h4>
+                            <p class="timeline-place">Technicienne Supérieure</p>
+                            <p>Diplôme de technicienne supérieure en développement informatique</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">2023</div>
+                        <div class="timeline-content">
+                            <h4>Baccalauréat Scientifique</h4>
+                            <p class="timeline-place">Science Physique - Option Français</p>
+                            <p>Diplôme de fin d'études secondaires</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expériences Professionnelles -->
+                <div class="timeline-category animate-on-scroll delay-1">
+                    <h3 class="timeline-category-title">
+                        <i class="fas fa-briefcase"></i> Expériences Professionnelles
+                    </h3>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Mai 2025 (1 mois)</div>
+                        <div class="timeline-content">
+                            <h4>Stagiaire en développement des systèmes d'information</h4>
+                            <p class="timeline-place">Sanipro S.A.R.L</p>
+                            <ul class="timeline-tasks">
+                                <li>Développement d'un site web pour la société</li>
+                                <li>Mise à jour des procédures IT</li>
+                                <li>Optimisation des processus numériques</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Avril-Mai 2024 (15 jours)</div>
+                        <div class="timeline-content">
+                            <h4>Stagiaire Technicienne en informatique</h4>
+                            <p class="timeline-place">PYTOPROD</p>
+                            <ul class="timeline-tasks">
+                                <li>Organisation des archives via Excel</li>
+                                <li>Installation et mise à jour d'applications internes</li>
+                                <li>Support technique aux utilisateurs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <div class="section-divider wave-divider reverse"></div>
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">
+                    <span class="text-gradient">Contactez</span>-Moi
+                </h2>
+                <p class="section-subtitle">
+                    Recherche active d'alternance ou stage en développement
+                </p>
+            </div>
+
+            <div class="contact-content">
+                <div class="contact-info animate-on-scroll">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3>Disponibilité</h3>
+                        <p>Actuellement à la recherche d'une alternance ou d'un stage en développement</p>
+                        <div class="availability">
+                            <span class="status-dot active"></span>
+                            <span>Disponible immédiatement</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-links">
+                        <a href="https://linkedin.com/in/chaymae-ed-dryaf" target="_blank" class="contact-link">
+                            <div class="link-icon">
+                                <i class="fab fa-linkedin"></i>
+                            </div>
+                            <div class="link-content">
+                                <h4>LinkedIn</h4>
+                                <p>Connectons-nous professionnellement</p>
+                            </div>
+                        </a>
+
+                        <a href="https://github.com/chaymae-ed-dryaf" target="_blank" class="contact-link">
+                            <div class="link-icon">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div class="link-content">
+                                <h4>GitHub</h4>
+                                <p>Découvrez mes projets et contributions</p>
+                            </div>
+                        </a>
+
+                        <a href="cv-chaymae-ed-dryaf.pdf" class="contact-link" download>
+                            <div class="link-icon">
+                                <i class="fas fa-download"></i>
+                            </div>
+                            <div class="link-content">
+                                <h4>Télécharger CV</h4>
+                                <p>CV complet au format PDF</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="contact-form-container animate-on-scroll delay-1">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nom Complet</label>
+                            <input type="text" id="name" required>
+                            <div class="input-underline"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                            <div class="input-underline"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sujet">Sujet</label>
+                            <select id="sujet" required>
+                                <option value="">Sélectionnez une option</option>
+                                <option value="alternance">Proposition d'alternance</option>
+                                <option value="stage">Proposition de stage</option>
+                                <option value="projet">Projet de développement</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                            <div class="input-underline"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="5" required></textarea>
+                            <div class="input-underline"></div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-glow">
+                            <i class="fas fa-paper-plane"></i>
+                            Envoyer le Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo-container">
+                        <span class="logo-text">C<span class="logo-highlight">E</span></span>
+                        <div class="logo-dot"></div>
+                    </div>
+                    <p class="footer-tagline">
+                        Passion, Innovation, Excellence
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="#home">Accueil</a></li>
+                        <li><a href="#competences">Compétences</a></li>
+                        <li><a href="#projets">Projets</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-social">
+                    <h4>Réseaux</h4>
+                    <div class="social-icons">
+                        <a href="https://linkedin.com/in/chaymae-ed-dryaf" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/chaymae-ed-dryaf" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:chaymae.ed.dryaf@email.com">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Chaymae ED_DRYAF. Tous droits réservés.</p>
+                <p class="footer-credit">
+                    Développé avec <i class="fas fa-heart"></i> et <i class="fas fa-code"></i>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
