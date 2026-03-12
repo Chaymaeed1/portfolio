@@ -14,11 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations();
     initTypingEffect();
     initParticles();
+    initGeometricGrid();
+    initFloatingCircles();
     initStatsCounter();
     initFormValidation();
+    initHexagonEffect();
     initParallax();
-    initTimelineAnimations();
-    initTagInteractions();
 });
 
 // Theme Toggle
@@ -31,47 +32,13 @@ function initTheme() {
         const isDark = document.body.classList.toggle('dark-theme');
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
         updateThemeIcon(isDark ? 'dark' : 'light');
-
-        // Show theme change notification
-        showNotification(`Thème ${isDark ? 'sombre' : 'clair'} activé`);
+        updateBackgroundEffects();
     });
 }
 
 function updateThemeIcon(theme) {
     const icon = themeToggle.querySelector('i');
     icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-}
-
-// Notification System
-function showNotification(message) {
-    const notification = document.createElement('div');
-    notification.className = 'notification';
-    notification.innerHTML = `
-        <i class="fas fa-check-circle"></i>
-        <span>${message}</span>
-    `;
-
-    notification.style.cssText = `
-        position: fixed;
-        top: 100px;
-        right: 20px;
-        background: var(--gradient-primary);
-        color: white;
-        padding: 15px 25px;
-        border-radius: var(--border-radius-md);
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        z-index: 9999;
-        box-shadow: var(--shadow-lg);
-        animation: slideInRight 0.3s ease, fadeOut 0.3s ease 2.7s;
-    `;
-
-    document.body.appendChild(notification);
-
-    setTimeout(() => {
-        notification.remove();
-    }, 3000);
 }
 
 // Mobile Menu
@@ -91,6 +58,9 @@ window.addEventListener('scroll', () => {
 
     // Update active section
     updateActiveSection();
+
+    // Update parallax
+    updateParallax();
 });
 
 // Floating Navigation
@@ -130,44 +100,64 @@ floatingBtns.forEach(btn => {
 
         if (section) {
             window.scrollTo({
-                top: section.offsetTop - 80,
+                top: section.offsetTop,
                 behavior: 'smooth'
             });
-
-            // Show active feedback
-            btn.classList.add('clicked');
-            setTimeout(() => btn.classList.remove('clicked'), 300);
         }
     });
 });
 
-// Animations
+// Advanced Animations
 function initAnimations() {
     // Add hover effects to competence cards
     const competenceCards = document.querySelectorAll('.competence-card, .soft-skill, .language-card');
     competenceCards.forEach(card => {
         card.addEventListener('mouseenter', () => {
             card.style.transform = card.classList.contains('language-card') ?
-                'translateX(10px)' :
-                'translateY(-10px)';
+                'translateX(10px) scale(1.02)' :
+                'translateY(-10px) scale(1.02)';
         });
 
         card.addEventListener('mouseleave', () => {
-            card.style.transform = 'translateY(0) translateX(0)';
+            card.style.transform = 'translateY(0) translateX(0) scale(1)';
         });
     });
 
-    // Project card animations
+    // Project card 3D animations
     const projetCards = document.querySelectorAll('.projet-card');
     projetCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.transform = 'translateY(-15px)';
-            card.style.boxShadow = '0 20px 60px rgba(26, 32, 44, 0.2)';
+        card.addEventListener('mouseenter', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateY = ((x - centerX) / centerX) * 5;
+            const rotateX = ((centerY - y) / centerY) * 5;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+            card.style.transition = 'transform 0.3s ease';
+        });
+
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateY = ((x - centerX) / centerX) * 5;
+            const rotateX = ((centerY - y) / centerY) * 5;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
         });
 
         card.addEventListener('mouseleave', () => {
-            card.style.transform = 'translateY(0)';
-            card.style.boxShadow = 'var(--shadow-md)';
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+            card.style.transition = 'transform 0.5s ease';
         });
     });
 
@@ -176,20 +166,33 @@ function initAnimations() {
     techBubbles.forEach(bubble => {
         bubble.addEventListener('mouseenter', () => {
             bubble.style.animation = 'none';
-            bubble.style.transform = 'scale(1.2)';
+            bubble.style.transform = 'scale(1.3) rotate(180deg)';
             setTimeout(() => {
                 bubble.style.animation = 'orbit 20s linear infinite';
-                bubble.style.transform = 'scale(1)';
             }, 300);
         });
+
+        bubble.addEventListener('mouseleave', () => {
+            bubble.style.transform = 'scale(1) rotate(0deg)';
+        });
+    });
+}
+
+// Hexagon Effect
+function initHexagonEffect() {
+    const hexagon = document.querySelector('.hexagon');
+    const hexagonBorder = document.querySelector('.hexagon-border');
+
+    if (!hexagon || !hexagonBorder) return;
+
+    hexagon.addEventListener('mouseenter', () => {
+        hexagonBorder.style.animation = 'borderPulse 1s infinite';
+        hexagonBorder.style.opacity = '1';
     });
 
-    // Button click animations
-    document.querySelectorAll('.btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            this.classList.add('clicked');
-            setTimeout(() => this.classList.remove('clicked'), 300);
-        });
+    hexagon.addEventListener('mouseleave', () => {
+        hexagonBorder.style.animation = 'borderPulse 3s infinite';
+        hexagonBorder.style.opacity = '0.7';
     });
 }
 
@@ -205,9 +208,11 @@ function initScrollAnimations() {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
 
-                // Add special effect for some elements
-                if (entry.target.classList.contains('stat')) {
-                    entry.target.classList.add('counted');
+                // Add bounce animation for cards
+                if (entry.target.classList.contains('animate-on-scroll')) {
+                    setTimeout(() => {
+                        entry.target.style.transform = 'translateY(0)';
+                    }, 100);
                 }
             }
         });
@@ -281,10 +286,36 @@ function initParticles() {
     if (!container) return;
 
     const particleCount = 30;
+    const particles = [];
 
     for (let i = 0; i < particleCount; i++) {
-        createParticle(container);
+        particles.push(createParticle(container));
     }
+
+    // Animate particles
+    function animateParticles() {
+        particles.forEach(particle => {
+            if (particle) {
+                const currentLeft = parseFloat(particle.style.left);
+                const currentTop = parseFloat(particle.style.top);
+
+                particle.style.left = (currentLeft + particle.speedX) + 'px';
+                particle.style.top = (currentTop + particle.speedY) + 'px';
+
+                // Bounce off edges
+                if (currentLeft > window.innerWidth || currentLeft < 0) {
+                    particle.speedX *= -1;
+                }
+                if (currentTop > window.innerHeight || currentTop < 0) {
+                    particle.speedY *= -1;
+                }
+            }
+        });
+
+        requestAnimationFrame(animateParticles);
+    }
+
+    animateParticles();
 }
 
 function createParticle(container) {
@@ -292,49 +323,80 @@ function createParticle(container) {
     particle.classList.add('particle');
 
     // Random position
-    const posX = Math.random() * 100;
-    const posY = Math.random() * 100;
+    const posX = Math.random() * window.innerWidth;
+    const posY = Math.random() * window.innerHeight;
 
     // Random size
     const size = Math.random() * 3 + 1;
 
-    // Random animation
-    const duration = Math.random() * 20 + 10;
-    const delay = Math.random() * 5;
+    // Random speed
+    particle.speedX = (Math.random() - 0.5) * 0.5;
+    particle.speedY = (Math.random() - 0.5) * 0.5;
 
-    // Random color from theme
-    const colors = [
-        'var(--primary-color)',
-        'var(--accent-color)',
-        'var(--secondary-color)',
-        'var(--color-teal)',
-        'var(--color-purple)'
-    ];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    // Random color
+    const colors = ['#9C27B0', '#FF5722', '#4CAF50'];
+    const color = colors[Math.floor(Math.random() * colors.length)];
 
     // Set styles
     particle.style.cssText = `
         position: absolute;
-        top: ${posY}vh;
-        left: ${posX}vw;
+        top: ${posY}px;
+        left: ${posX}px;
         width: ${size}px;
         height: ${size}px;
-        background: ${randomColor};
+        background: ${color};
         border-radius: 50%;
-        opacity: ${Math.random() * 0.2 + 0.1};
-        animation: float ${duration}s infinite ease-in-out ${delay}s;
-        box-shadow: 0 0 ${size * 2}px ${randomColor};
+        opacity: ${Math.random() * 0.3 + 0.1};
+        filter: blur(1px);
+        pointer-events: none;
     `;
 
     container.appendChild(particle);
+    return particle;
+}
 
-    // Remove and recreate after animation
-    setTimeout(() => {
-        if (particle.parentNode === container) {
-            particle.remove();
-            createParticle(container);
+// Geometric Grid Animation
+function initGeometricGrid() {
+    const grid = document.querySelector('.geometric-grid');
+    if (!grid) return;
+
+    let angle = 0;
+
+    function animateGrid() {
+        angle = (angle + 0.2) % 360;
+        const scale = 1 + Math.sin(angle * Math.PI / 180) * 0.1;
+
+        grid.style.transform = `scale(${scale}) rotate(${angle}deg)`;
+        requestAnimationFrame(animateGrid);
+    }
+
+    animateGrid();
+}
+
+// Floating Circles Animation
+function initFloatingCircles() {
+    const circles = document.querySelectorAll('.floating-circles::before, .floating-circles::after, .floating-circles .circle-3');
+
+    circles.forEach((circle, index) => {
+        if (circle.style) {
+            circle.style.animationDuration = `${20 + index * 5}s`;
+            circle.style.animationDelay = `${index * 2}s`;
         }
-    }, duration * 1000);
+    });
+}
+
+// Update Background Effects on Theme Change
+function updateBackgroundEffects() {
+    const isDark = document.body.classList.contains('dark-theme');
+    const shapes = document.querySelector('.floating-shapes');
+
+    if (shapes) {
+        if (isDark) {
+            shapes.style.filter = 'blur(40px) brightness(0.8)';
+        } else {
+            shapes.style.filter = 'blur(40px) brightness(1)';
+        }
+    }
 }
 
 // Stats Counter
@@ -388,9 +450,6 @@ function initFormValidation() {
         if (!name) {
             showError('name', 'Le nom est requis');
             isValid = false;
-        } else if (name.length < 2) {
-            showError('name', 'Le nom doit contenir au moins 2 caractères');
-            isValid = false;
         }
 
         // Validate email
@@ -418,24 +477,61 @@ function initFormValidation() {
         }
 
         if (isValid) {
-            // Simulate form submission
+            // Simulate form submission with animation
             const submitBtn = contactForm.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
 
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
             submitBtn.disabled = true;
 
-            // Simulate API call
-            setTimeout(() => {
-                showNotification('Message envoyé avec succès ! Je vous répondrai dans les plus brefs délais.');
-                contactForm.reset();
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
+            // Add sending animation
+            const formElements = contactForm.querySelectorAll('input, select, textarea');
+            formElements.forEach(el => {
+                el.style.transition = 'all 0.3s ease';
+                el.style.opacity = '0.7';
+                el.style.transform = 'translateY(-5px)';
+            });
 
-                // Animate success
-                const contactCard = document.querySelector('.contact-card');
-                contactCard.classList.add('success-animation');
-                setTimeout(() => contactCard.classList.remove('success-animation'), 1000);
+            setTimeout(() => {
+                // Success animation
+                formElements.forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                });
+
+                // Success message with animation
+                const successMsg = document.createElement('div');
+                successMsg.className = 'success-message';
+                successMsg.innerHTML = `
+                    <i class="fas fa-check-circle"></i>
+                    <span>Message envoyé avec succès ! Je vous répondrai dans les plus brefs délais.</span>
+                `;
+                successMsg.style.cssText = `
+                    background: linear-gradient(135deg, #4CAF50, #388E3C);
+                    color: white;
+                    padding: 20px;
+                    border-radius: var(--border-radius-md);
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    margin-top: 20px;
+                    animation: slideInUp 0.5s ease;
+                `;
+
+                contactForm.appendChild(successMsg);
+
+                // Reset form
+                setTimeout(() => {
+                    contactForm.reset();
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+
+                    // Remove success message
+                    setTimeout(() => {
+                        successMsg.style.animation = 'slideOutDown 0.5s ease';
+                        setTimeout(() => successMsg.remove(), 500);
+                    }, 3000);
+                }, 1000);
             }, 2000);
         }
     });
@@ -446,24 +542,27 @@ function showError(fieldId, message) {
     const error = document.createElement('div');
     error.className = 'error';
     error.style.cssText = `
-        color: var(--color-red);
+        color: var(--secondary-color);
         font-size: 14px;
         margin-top: 5px;
-        display: flex;
-        align-items: center;
-        gap: 5px;
+        animation: shake 0.5s ease;
     `;
-    error.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+    error.textContent = message;
 
     field.parentNode.appendChild(error);
 
     // Add error class to input
-    field.style.borderBottomColor = 'var(--color-red)';
+    field.style.borderBottomColor = 'var(--secondary-color)';
+
+    // Shake animation
+    field.style.animation = 'shake 0.5s ease';
+    setTimeout(() => field.style.animation = '', 500);
 
     // Remove error on input
     field.addEventListener('input', () => {
         error.remove();
         field.style.borderBottomColor = '';
+        field.style.animation = '';
     }, { once: true });
 }
 
@@ -478,54 +577,19 @@ function initTagInteractions() {
 
     tags.forEach(tag => {
         tag.addEventListener('mouseenter', () => {
-            tag.style.transform = 'translateY(-2px)';
-            tag.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+            tag.style.transform = 'translateY(-2px) scale(1.05)';
+            tag.style.boxShadow = '0 4px 12px rgba(156, 39, 176, 0.2)';
         });
 
         tag.addEventListener('mouseleave', () => {
-            tag.style.transform = 'translateY(0)';
+            tag.style.transform = 'translateY(0) scale(1)';
             tag.style.boxShadow = 'none';
         });
-
-        tag.addEventListener('click', () => {
-            tag.classList.toggle('selected');
-        });
     });
 }
 
-// Parallax Effect for Background
-function initParallax() {
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const parallaxElements = document.querySelectorAll('.floating-shapes, .gradient-overlay');
-
-        parallaxElements.forEach((el, index) => {
-            const speed = 0.3 + (index * 0.1);
-            el.style.transform = `translateY(${scrolled * speed * 0.1}px)`;
-        });
-    });
-}
-
-// Timeline item animations
-function initTimelineAnimations() {
-    const timelineItems = document.querySelectorAll('.timeline-item');
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateX(0)';
-            }
-        });
-    }, { threshold: 0.1 });
-
-    timelineItems.forEach((item, index) => {
-        item.style.opacity = '0';
-        item.style.transform = 'translateX(-20px)';
-        item.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
-        observer.observe(item);
-    });
-}
+// Initialize tag interactions
+document.addEventListener('DOMContentLoaded', initTagInteractions);
 
 // Smooth Scrolling for Anchor Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -549,456 +613,91 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Contact link animations
-document.querySelectorAll('.contact-link').forEach(link => {
-    link.addEventListener('mouseenter', () => {
-        const icon = link.querySelector('.link-icon');
-        icon.style.transform = 'scale(1.1) rotate(5deg)';
-    });
+// Parallax Effect for Background
+function initParallax() {
+    window.addEventListener('scroll', updateParallax);
+}
 
-    link.addEventListener('mouseleave', () => {
-        const icon = link.querySelector('.link-icon');
-        icon.style.transform = 'scale(1) rotate(0deg)';
-    });
-});
+function updateParallax() {
+    const scrolled = window.pageYOffset;
+    const parallaxElements = document.querySelectorAll('.floating-shapes, .gradient-overlay, .geometric-grid');
 
-// Social icon animations
-document.querySelectorAll('.social-icons a').forEach(icon => {
-    icon.addEventListener('mouseenter', () => {
-        icon.style.transform = 'translateY(-5px) rotate(5deg)';
-    });
-
-    icon.addEventListener('mouseleave', () => {
-        icon.style.transform = 'translateY(0) rotate(0deg)';
-    });
-});
-
-// Logo animation
-const logoContainer = document.querySelector('.logo-container');
-if (logoContainer) {
-    logoContainer.addEventListener('mouseenter', () => {
-        const logoDot = logoContainer.querySelector('.logo-dot');
-        logoDot.style.transform = 'scale(1.5)';
-        setTimeout(() => logoDot.style.transform = 'scale(1)', 300);
+    parallaxElements.forEach((el, index) => {
+        const speed = 0.3 + (index * 0.1);
+        el.style.transform = `translateY(${scrolled * speed * 0.1}px)`;
     });
 }
 
-// Add CSS for animations
+// Timeline item animations
+function initTimelineAnimations() {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateX(0)';
+
+                // Add staggered animation for child elements
+                const content = entry.target.querySelector('.timeline-content');
+                if (content) {
+                    content.style.animation = 'slideInRight 0.5s ease 0.2s both';
+                }
+            }
+        });
+    }, { threshold: 0.1 });
+
+    timelineItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(-20px)';
+        item.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+        observer.observe(item);
+    });
+}
+
+// Initialize timeline animations
+document.addEventListener('DOMContentLoaded', initTimelineAnimations);
+
+// Additional CSS animations for success messages
 const style = document.createElement('style');
 style.textContent = `
-    .btn.clicked {
-        transform: scale(0.95);
+    @keyframes slideInUp {
+        from {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
     }
     
-    .floating-btn.clicked {
-        transform: translateY(-5px) scale(0.95);
+    @keyframes slideOutDown {
+        from {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateY(20px);
+            opacity: 0;
+        }
     }
     
-    .tag.selected {
-        background: var(--primary-color) !important;
-        color: white !important;
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+        20%, 40%, 60%, 80% { transform: translateX(5px); }
     }
     
-    .contact-card.success-animation {
-        animation: successPulse 1s ease;
-    }
-    
-    @keyframes successPulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.02); }
-    }
-    
-    @keyframes fadeOut {
-        from { opacity: 1; }
-        to { opacity: 0; }
-    }
-    
-    .stat.counted .stat-number {
-        animation: countPop 0.3s ease;
-    }
-    
-    @keyframes countPop {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.1); }
-        100% { transform: scale(1); }
-    }
-    
-    .nav-link.active {
-        font-weight: 600;
+    @keyframes slideInRight {
+        from {
+            transform: translateX(-20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
     }
 `;
 document.head.appendChild(style);
-
-// Keyboard shortcuts
-document.addEventListener('keydown', (e) => {
-    // Toggle theme with Ctrl+T
-    if (e.ctrlKey && e.key === 't') {
-        e.preventDefault();
-        themeToggle.click();
-    }
-
-    // Toggle menu with Escape
-    if (e.key === 'Escape') {
-        navMenu.classList.remove('active');
-        menuToggle.querySelector('i').className = 'fas fa-bars';
-    }
-});
-
-// Load animations when images are loaded
-window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
-
-    // Animate hero image
-    const heroImage = document.querySelector('.hero-image');
-    if (heroImage) {
-        heroImage.style.opacity = '1';
-        heroImage.style.transform = 'scale(1)';
-    }
-});
-
-// Add loading animation to body
-document.body.style.opacity = '0';
-document.body.style.transition = 'opacity 0.5s ease';
-
-setTimeout(() => {
-    document.body.style.opacity = '1';
-}, 100);
-
-// Intersection Observer for lazy loading
-const imageObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const img = entry.target;
-            img.src = img.dataset.src;
-            img.classList.add('loaded');
-            imageObserver.unobserve(img);
-        }
-    });
-}, { rootMargin: '50px 0px' });
-
-// Observe images for lazy loading
-document.querySelectorAll('img[data-src]').forEach(img => {
-    imageObserver.observe(img);
-});
-// Advanced Background Animations
-function initAdvancedBackground() {
-    // 1. Particules JS (si vous voulez une bibliothèque externe)
-    initParticlesJS();
-
-    // 2. Floating Shapes
-    createFloatingShapes();
-
-    // 3. Animated Gradients
-    animateGradients();
-
-    // 4. Interactive Background
-    initInteractiveBackground();
-}
-
-// Option 1: Particules JS (Bibliothèque externe - optionnel)
-function initParticlesJS() {
-    // Si vous voulez utiliser particles.js, incluez cette bibliothèque
-    // Sinon, utilisez notre système de particules personnalisé
-    if (typeof particlesJS !== 'undefined') {
-        particlesJS('particles-js', {
-            particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: "#6C63FF" },
-                shape: { type: "circle" },
-                opacity: { value: 0.3, random: true },
-                size: { value: 3, random: true },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: "#6C63FF",
-                    opacity: 0.2,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: "none",
-                    random: true,
-                    straight: false,
-                    out_mode: "out",
-                    bounce: false
-                }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: {
-                    onhover: { enable: true, mode: "repulse" },
-                    onclick: { enable: true, mode: "push" },
-                    resize: true
-                }
-            },
-            retina_detect: true
-        });
-    } else {
-        // Notre système de particules personnalisé
-        createCustomParticles();
-    }
-}
-
-// Système de particules personnalisé
-function createCustomParticles() {
-    const particlesContainer = document.querySelector('.floating-shapes');
-    if (!particlesContainer) return;
-
-    const particleCount = 50;
-
-    for (let i = 0; i < particleCount; i++) {
-        createParticle(particlesContainer, i);
-    }
-}
-
-function createParticle(container, index) {
-    const particle = document.createElement('div');
-    particle.className = 'custom-particle';
-
-    // Position aléatoire
-    const posX = Math.random() * 100;
-    const posY = Math.random() * 100;
-
-    // Taille aléatoire
-    const size = Math.random() * 5 + 1;
-
-    // Animation aléatoire
-    const duration = Math.random() * 20 + 10;
-    const delay = Math.random() * 5;
-
-    // Couleur aléatoire du thème
-    const colors = [
-        'rgba(108, 99, 255, 0.3)',
-        'rgba(255, 101, 132, 0.3)',
-        'rgba(78, 205, 196, 0.3)',
-        'rgba(255, 153, 102, 0.3)',
-        'rgba(159, 122, 234, 0.3)'
-    ];
-    const color = colors[Math.floor(Math.random() * colors.length)];
-
-    particle.style.cssText = `
-        position: absolute;
-        top: ${posY}vh;
-        left: ${posX}vw;
-        width: ${size}px;
-        height: ${size}px;
-        background: ${color};
-        border-radius: 50%;
-        opacity: ${Math.random() * 0.5 + 0.1};
-        animation: particleFloat ${duration}s infinite ease-in-out ${delay}s;
-        box-shadow: 0 0 ${size * 2}px ${color};
-        pointer-events: none;
-    `;
-
-    container.appendChild(particle);
-
-    // Recréer après animation
-    setTimeout(() => {
-        if (particle.parentNode === container) {
-            particle.remove();
-            createParticle(container, index);
-        }
-    }, duration * 1000);
-}
-
-// Créer des formes flottantes
-function createFloatingShapes() {
-    const shapesContainer = document.querySelector('.floating-shapes');
-    if (!shapesContainer) return;
-
-    // On utilise les formes CSS statiques
-    // Pour des formes dynamiques :
-    const shapeCount = 8;
-
-    for (let i = 0; i < shapeCount; i++) {
-        createDynamicShape(shapesContainer, i);
-    }
-}
-
-function createDynamicShape(container, index) {
-    const shape = document.createElement('div');
-    shape.className = 'dynamic-shape';
-
-    // Taille aléatoire
-    const size = Math.random() * 200 + 100;
-
-    // Position aléatoire
-    const posX = Math.random() * 100;
-    const posY = Math.random() * 100;
-
-    // Couleur dégradée aléatoire
-    const gradients = [
-        'linear-gradient(135deg, rgba(108, 99, 255, 0.1), rgba(78, 205, 196, 0.1))',
-        'linear-gradient(135deg, rgba(255, 101, 132, 0.1), rgba(255, 153, 102, 0.1))',
-        'linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(108, 99, 255, 0.1))',
-        'linear-gradient(135deg, rgba(159, 122, 234, 0.1), rgba(255, 101, 132, 0.1))'
-    ];
-    const gradient = gradients[Math.floor(Math.random() * gradients.length)];
-
-    // Animation aléatoire
-    const duration = Math.random() * 30 + 20;
-    const delay = Math.random() * 10;
-
-    shape.style.cssText = `
-        position: absolute;
-        top: ${posY}vh;
-        left: ${posX}vw;
-        width: ${size}px;
-        height: ${size}px;
-        background: ${gradient};
-        border-radius: ${Math.random() > 0.5 ? '50%' : '30%'};
-        opacity: ${Math.random() * 0.2 + 0.05};
-        filter: blur(${size / 4}px);
-        animation: dynamicFloat ${duration}s infinite ease-in-out ${delay}s;
-        pointer-events: none;
-    `;
-
-    container.appendChild(shape);
-}
-
-// Animation des dégradés
-function animateGradients() {
-    const mesh = document.querySelector('.gradient-mesh');
-    if (mesh) {
-        mesh.style.animation = 'pulseMesh 10s infinite ease-in-out';
-    }
-
-    // Animation des couleurs
-    animateMeshColors();
-}
-
-function animateMeshColors() {
-    const mesh = document.querySelector('.gradient-mesh');
-    if (!mesh) return;
-
-    let hue = 0;
-
-    setInterval(() => {
-        hue = (hue + 0.1) % 360;
-
-        // Créer un effet de changement de couleur subtil
-        mesh.style.background = `
-            radial-gradient(circle at 20% 80%, hsla(${hue}, 70%, 60%, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, hsla(${(hue + 120) % 360}, 70%, 60%, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 40% 40%, hsla(${(hue + 240) % 360}, 70%, 60%, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 60% 60%, hsla(${(hue + 180) % 360}, 70%, 60%, 0.1) 0%, transparent 50%)
-        `;
-    }, 50);
-}
-
-// Background interactif
-function initInteractiveBackground() {
-    const background = document.querySelector('.animated-background');
-    if (!background) return;
-
-    // Réagir au défilement
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        background.style.transform = `translateY(${scrolled * 0.1}px)`;
-    });
-
-    // Réagir au mouvement de la souris
-    document.addEventListener('mousemove', (e) => {
-        const x = (e.clientX / window.innerWidth) * 20 - 10;
-        const y = (e.clientY / window.innerHeight) * 20 - 10;
-
-        background.style.transform = `translate(${x}px, ${y}px)`;
-    });
-
-    // Effet de vague au clic
-    document.addEventListener('click', (e) => {
-        createRippleEffect(e.clientX, e.clientY);
-    });
-}
-
-// Effet de vague au clic
-function createRippleEffect(x, y) {
-    const ripple = document.createElement('div');
-    ripple.className = 'ripple-effect';
-
-    ripple.style.cssText = `
-        position: fixed;
-        top: ${y}px;
-        left: ${x}px;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(108, 99, 255, 0.2) 0%, transparent 70%);
-        transform: translate(-50%, -50%);
-        pointer-events: none;
-        z-index: 9998;
-        animation: rippleExpand 1.5s ease-out;
-    `;
-
-    document.body.appendChild(ripple);
-
-    setTimeout(() => {
-        ripple.remove();
-    }, 1500);
-}
-
-// Ajouter les animations CSS
-function addBackgroundAnimationsCSS() {
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes particleFloat {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-            }
-            25% {
-                transform: translate(50px, -30px) scale(1.1);
-            }
-            50% {
-                transform: translate(20px, 50px) scale(0.9);
-            }
-            75% {
-                transform: translate(-30px, 20px) scale(1.05);
-            }
-        }
-        
-        @keyframes dynamicFloat {
-            0%, 100% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            33% {
-                transform: translate(100px, -50px) rotate(120deg);
-            }
-            66% {
-                transform: translate(-50px, 100px) rotate(240deg);
-            }
-        }
-        
-        @keyframes rippleExpand {
-            0% {
-                width: 0;
-                height: 0;
-                opacity: 1;
-            }
-            100% {
-                width: 500px;
-                height: 500px;
-                opacity: 0;
-            }
-        }
-        
-        /* Effet de parallaxe pour les sections */
-        .section {
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Assurer que le contenu est au-dessus du background */
-        .header, .section > .container, .footer {
-            position: relative;
-            z-index: 2;
-        }
-    `;
-    document.head.appendChild(style);
-}
-
-// Initialiser quand la page est chargée
-document.addEventListener('DOMContentLoaded', () => {
-    addBackgroundAnimationsCSS();
-    initAdvancedBackground();
-});
