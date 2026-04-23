@@ -366,9 +366,9 @@ class ContactForm {
 
     setError(id, message) {
         const field = document.getElementById(id);
-        const error = field?.parentElement?.querySelector('.form-error');
+        const error = field ? .parentElement ? .querySelector('.form-error');
         if (error) error.textContent = message;
-        field?.classList.toggle('is-invalid', !!message);
+        field ? .classList.toggle('is-invalid', !!message);
     }
 
     clearError(id) {

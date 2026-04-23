@@ -154,8 +154,8 @@ class Navigation {
     closeMenu() {
         this.isOpen = false;
         this.hamburger?.classList.remove('is-open');
-        this.hamburger?.setAttribute('aria-expanded', 'false');
-        this.navLinks?.classList.remove('nav__links--mobile-open');
+        this.hamburger ? .setAttribute('aria-expanded', 'false');
+        this.navLinks ? .classList.remove('nav__links--mobile-open');
     }
 }
 
@@ -349,7 +349,7 @@ class ContactForm {
     validateField(id) {
         const field = document.getElementById(id);
         const rules = this.validators[id];
-        const value = field?.value?.trim() || '';
+        const value = field ? .value ? .trim() || '';
         let message = '';
 
         if (rules.required && !value) {
@@ -366,9 +366,9 @@ class ContactForm {
 
     setError(id, message) {
         const field = document.getElementById(id);
-        const error = field?.parentElement?.querySelector('.form-error');
+        const error = field ? .parentElement ? .querySelector('.form-error');
         if (error) error.textContent = message;
-        field?.classList.toggle('is-invalid', !!message);
+        field ? .classList.toggle('is-invalid', !!message);
     }
 
     clearError(id) {
