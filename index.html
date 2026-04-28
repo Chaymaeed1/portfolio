@@ -4,12 +4,15 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Chaymae ED_DRYAF — Développeuse Full Stack spécialisée Java Spring Boot, Angular, Python. Disponible pour stage ou alternance." />
+    <meta name="description"
+        content="Chaymae ED_DRYAF — Développeuse Full Stack spécialisée Java Spring Boot, Angular, Python. Disponible pour stage ou alternance." />
     <title>Chaymae ED_DRYAF — Développeuse Full Stack</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@300;400&display=swap"
+        rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
 </head>
@@ -19,6 +22,24 @@
     <!-- CURSOR -->
     <div class="cursor" id="js-cursor"></div>
     <div class="cursor-ring" id="js-cursor-ring"></div>
+
+    <!-- GLOBAL BACKGROUND SYSTEM -->
+    <div class="global-bg">
+        <div class="bg-mesh">
+            <div class="bg-shape bg-shape--1"></div>
+            <div class="bg-shape bg-shape--2"></div>
+            <div class="bg-shape bg-shape--3"></div>
+        </div>
+        <div class="tech-bg-layer" id="js-tech-layer">
+            <div class="circuit-grid"></div>
+            <!-- Code fragments will be injected here -->
+        </div>
+        <div class="spotlight" id="js-spotlight"></div>
+        <div class="bg-noise"></div>
+    </div>
+
+    <!-- SCROLL PROGRESS -->
+    <div class="scroll-progress" id="js-scroll-progress"></div>
 
     <!-- LOADER -->
     <div class="loader" id="js-loader">
@@ -45,13 +66,18 @@
                     <li><a href="#experience" class="nav__link" data-section="experience">Parcours</a></li>
                     <li><a href="#contact" class="nav__link" data-section="contact">Contact</a></li>
                 </ul>
+                <button class="nav__toggle" id="js-nav-toggle" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
                 <div class="nav__actions">
                     <a href="doc/cv chaymae ed-dryaf.pdf" download class="btn btn--cv">
                         <i class="fas fa-download"></i><span>CV</span>
                     </a>
                     <button class="hamburger" id="js-hamburger" aria-label="Menu" aria-expanded="false">
-            <span></span><span></span><span></span>
-          </button>
+                        <span></span><span></span><span></span>
+                    </button>
                 </div>
             </div>
         </nav>
@@ -61,6 +87,13 @@
 
         <!-- ═══ HERO ═══ -->
         <section id="home" class="section hero">
+            <!-- Floating Background Icons -->
+            <i class="fab fa-java floating-icon" style="top: 15%; left: 10%; animation-delay: 0s;"></i>
+            <i class="fab fa-python floating-icon" style="top: 25%; right: 15%; animation-delay: 2s;"></i>
+            <i class="fab fa-angular floating-icon" style="bottom: 20%; left: 20%; animation-delay: 4s;"></i>
+            <i class="fab fa-js floating-icon" style="top: 60%; right: 10%; animation-delay: 1s;"></i>
+            <i class="fab fa-docker floating-icon" style="bottom: 10%; right: 25%; animation-delay: 3s;"></i>
+
             <div class="container hero__grid">
 
                 <div class="hero__content">
@@ -80,50 +113,55 @@
                     </p>
 
                     <p class="hero__bio" data-reveal data-delay="3">
-                        Développeuse Full Stack spécialisée dans la conception d'applications web performantes. Diplômée en <strong>BTS Développement des Systèmes d'Information</strong>, actuellement en formation <strong>JobInTech</strong> à la Faculté
-                        des Sciences de Meknès. Rigoureuse, orientée vers les solutions et passionnée par les architectures évolutives.
+                        Développeuse Full Stack spécialisée dans la conception d'applications web performantes. Diplômée
+                        en <strong>BTS Développement des Systèmes d'Information</strong>, actuellement en formation
+                        <strong>JobInTech</strong> à la Faculté
+                        des Sciences de Meknès. Rigoureuse, orientée vers les solutions et passionnée par les
+                        architectures évolutives.
                     </p>
                     <div class="hero__cta">
-                        <a href="#contact" class="btn btn--primary"><span>Me contacter</span><i class="fas fa-arrow-right"></i></a>
+                        <a href="#contact" class="btn btn--primary"><span>Me contacter</span><i
+                                class="fas fa-arrow-right"></i></a>
                         <a href="#projets" class="btn btn--ghost"><span>Voir les projets</span></a>
                     </div>
                     <div class="hero__stats" data-reveal data-delay="5">
-                    <div class="stat">
-                        <span class="stat__num" data-count="4">0</span>
-                        <span class="stat__label">Projets clés</span>
-                    </div>
-                    <div class="stat__sep"></div>
-                    <div class="stat">
-                        <span class="stat__num" data-count="3">0</span>
-                        <span class="stat__label">Expériences</span>
-                    </div>
-                    <div class="stat__sep"></div>
-                    <div class="stat">
-                        <span class="stat__num" data-count="4">0</span>
-                        <span class="stat__label">Langues</span>
-                    </div>
+                        <div class="stat">
+                            <span class="stat__num" data-count="4">0</span>
+                            <span class="stat__label">Projets clés</span>
+                        </div>
+                        <div class="stat__sep"></div>
+                        <div class="stat">
+                            <span class="stat__num" data-count="3">0</span>
+                            <span class="stat__label">Expériences</span>
+                        </div>
+                        <div class="stat__sep"></div>
+                        <div class="stat">
+                            <span class="stat__num" data-count="4">0</span>
+                            <span class="stat__label">Langues</span>
+                        </div>
                     </div>
                 </div>
 
-            <div class="hero__visual" data-reveal data-delay="2">
-                <figure class="photo-frame">
-                    <div class="photo-frame__corner photo-frame__corner--tl"></div>
-                    <div class="photo-frame__corner photo-frame__corner--br"></div>
-                    <div class="photo-frame__ring"></div>
-                    <img src="photos/portephoto.jpeg" alt="Chaymae ED_DRYAF" class="photo-frame__img" loading="eager" />
-                    <div class="photo-frame__overlay"></div>
-                    <figcaption class="photo-frame__caption">
-                        <span class="status-dot"></span>Disponible · Tétouan, Maroc
-                    </figcaption>
-                </figure>
-                <aside class="tech-pills">
-                    <div class="tech-pill">Java Spring Boot</div>
-                    <div class="tech-pill">Angular</div>
-                    <div class="tech-pill">MySQL</div>
-                    <div class="tech-pill">Python</div>
-                    <div class="tech-pill">Docker</div>
-                </aside>
-            </div>
+                <div class="hero__visual" data-reveal="scale" data-delay="2">
+                    <figure class="photo-frame glare-wrap">
+                        <div class="photo-frame__corner photo-frame__corner--tl"></div>
+                        <div class="photo-frame__corner photo-frame__corner--br"></div>
+                        <div class="photo-frame__ring"></div>
+                        <img src="photos/portephoto.jpeg" alt="Chaymae ED_DRYAF" class="photo-frame__img"
+                            loading="eager" />
+                        <div class="photo-frame__overlay"></div>
+                        <figcaption class="photo-frame__caption">
+                            <span class="status-dot"></span>Disponible · Tétouan, Maroc
+                        </figcaption>
+                    </figure>
+                    <aside class="tech-pills">
+                        <div class="tech-pill">Java Spring Boot</div>
+                        <div class="tech-pill">Angular</div>
+                        <div class="tech-pill">MySQL</div>
+                        <div class="tech-pill">Python</div>
+                        <div class="tech-pill">Docker</div>
+                    </aside>
+                </div>
 
             </div>
             <div class="scroll-hint">
@@ -132,8 +170,40 @@
             </div>
         </section>
 
+        <!-- ═══ TECH MARQUEE ═══ -->
+        <div class="tech-marquee">
+            <div class="marquee__content">
+                <div class="marquee__item"><i class="fab fa-java"></i><span>Java</span></div>
+                <div class="marquee__item"><i class="fab fa-python"></i><span>Python</span></div>
+                <div class="marquee__item"><i class="fab fa-angular"></i><span>Angular</span></div>
+                <div class="marquee__item"><i class="fab fa-js"></i><span>JavaScript</span></div>
+                <div class="marquee__item"><i class="fab fa-node-js"></i><span>Node.js</span></div>
+                <div class="marquee__item"><i class="fab fa-docker"></i><span>Docker</span></div>
+                <div class="marquee__item"><i class="fas fa-database"></i><span>MySQL</span></div>
+                <div class="marquee__item"><i class="fab fa-html5"></i><span>HTML5</span></div>
+                <div class="marquee__item"><i class="fab fa-css3-alt"></i><span>CSS3</span></div>
+                <div class="marquee__item"><i class="fab fa-git-alt"></i><span>Git</span></div>
+                <!-- Duplicate for seamless scroll -->
+                <div class="marquee__item"><i class="fab fa-java"></i><span>Java</span></div>
+                <div class="marquee__item"><i class="fab fa-python"></i><span>Python</span></div>
+                <div class="marquee__item"><i class="fab fa-angular"></i><span>Angular</span></div>
+                <div class="marquee__item"><i class="fab fa-js"></i><span>JavaScript</span></div>
+                <div class="marquee__item"><i class="fab fa-node-js"></i><span>Node.js</span></div>
+                <div class="marquee__item"><i class="fab fa-docker"></i><span>Docker</span></div>
+                <div class="marquee__item"><i class="fas fa-database"></i><span>MySQL</span></div>
+                <div class="marquee__item"><i class="fab fa-html5"></i><span>HTML5</span></div>
+                <div class="marquee__item"><i class="fab fa-css3-alt"></i><span>CSS3</span></div>
+                <div class="marquee__item"><i class="fab fa-git-alt"></i><span>Git</span></div>
+            </div>
+        </div>
+
         <!-- ═══ COMPÉTENCES ═══ -->
         <section id="competences" class="section skills">
+            <i class="fab fa-github floating-icon floating-icon--alt" style="top: 10%; left: 5%;"></i>
+            <i class="fab fa-git-alt floating-icon" style="bottom: 15%; right: 8%;"></i>
+            <i class="fab fa-linux floating-icon floating-icon--slow" style="top: 50%; left: 2%;"></i>
+            <i class="fab fa-apple floating-icon" style="top: 20%; right: 5%;"></i>
+
             <div class="container">
                 <header class="section-header" data-reveal>
                     <div class="section-label">
@@ -142,12 +212,13 @@
                         <span class="section-label__text">Compétences</span>
                     </div>
                     <h2 class="section-title">Mes <em>Expertises</em></h2>
-                    <p class="section-sub">Un profil technique complet alliant maîtrise du code, des bases de données et des soft skills essentiels.</p>
+                    <p class="section-sub">Un profil technique complet alliant maîtrise du code, des bases de données et
+                        des soft skills essentiels.</p>
                 </header>
 
                 <div class="skills__grid">
 
-                    <div class="skill-group" data-reveal>
+                    <div class="skill-group" data-reveal="left">
                         <h3 class="skill-group__title"><i class="fas fa-terminal"></i> Langages &amp; Frameworks</h3>
                         <ul class="tag-list">
                             <li class="tag">Python</li>
@@ -160,7 +231,7 @@
                         </ul>
                     </div>
 
-                    <div class="skill-group" data-reveal data-delay="1">
+                    <div class="skill-group" data-reveal="right" data-delay="1">
                         <h3 class="skill-group__title"><i class="fas fa-database"></i> Bases de Données</h3>
                         <ul class="tag-list">
                             <li class="tag">MySQL</li>
@@ -170,7 +241,7 @@
                         </ul>
                     </div>
 
-                    <div class="skill-group" data-reveal data-delay="2">
+                    <div class="skill-group" data-reveal="left" data-delay="2">
                         <h3 class="skill-group__title"><i class="fas fa-tools"></i> Outils &amp; DevOps</h3>
                         <ul class="tag-list">
                             <li class="tag">Git &amp; GitHub</li>
@@ -183,8 +254,9 @@
                         </ul>
                     </div>
 
-                    <div class="skill-group" data-reveal data-delay="1">
-                        <h3 class="skill-group__title"><i class="fas fa-project-diagram"></i> Modélisation &amp; Analyse</h3>
+                    <div class="skill-group" data-reveal="right" data-delay="1">
+                        <h3 class="skill-group__title"><i class="fas fa-project-diagram"></i> Modélisation &amp; Analyse
+                        </h3>
                         <ul class="tag-list">
                             <li class="tag">UML</li>
                             <li class="tag">Merise</li>
@@ -228,31 +300,43 @@
                         <h3 class="skill-group__title"><i class="fas fa-language"></i> Langues</h3>
                         <div class="lang-grid">
                             <div class="lang-card">
-                                <div class="lang-card__top"><span class="lang-card__name">Arabe</span><span>🇲🇦</span></div>
+                                <div class="lang-card__top"><span class="lang-card__name">Arabe</span><span>🇲🇦</span>
+                                </div>
                                 <span class="lang-card__level">Langue maternelle</span>
                                 <div class="lang-card__dots">
-                                    <span class="dot dot--on"></span><span class="dot dot--on"></span><span class="dot dot--on"></span><span class="dot dot--on"></span><span class="dot dot--on"></span>
+                                    <span class="dot dot--on"></span><span class="dot dot--on"></span><span
+                                        class="dot dot--on"></span><span class="dot dot--on"></span><span
+                                        class="dot dot--on"></span>
                                 </div>
                             </div>
                             <div class="lang-card">
-                                <div class="lang-card__top"><span class="lang-card__name">Français</span><span>🇫🇷</span></div>
+                                <div class="lang-card__top"><span
+                                        class="lang-card__name">Français</span><span>🇫🇷</span></div>
                                 <span class="lang-card__level">Courant</span>
                                 <div class="lang-card__dots">
-                                    <span class="dot dot--on"></span><span class="dot dot--on"></span><span class="dot dot--on"></span><span class="dot dot--on"></span><span class="dot dot--on"></span>
+                                    <span class="dot dot--on"></span><span class="dot dot--on"></span><span
+                                        class="dot dot--on"></span><span class="dot dot--on"></span><span
+                                        class="dot dot--on"></span>
                                 </div>
                             </div>
                             <div class="lang-card">
-                                <div class="lang-card__top"><span class="lang-card__name">Anglais</span><span>🇬🇧</span></div>
+                                <div class="lang-card__top"><span
+                                        class="lang-card__name">Anglais</span><span>🇬🇧</span></div>
                                 <span class="lang-card__level">Courant</span>
                                 <div class="lang-card__dots">
-                                    <span class="dot dot--on"></span><span class="dot dot--on"></span><span class="dot dot--on"></span><span class="dot dot--on"></span><span class="dot"></span>
+                                    <span class="dot dot--on"></span><span class="dot dot--on"></span><span
+                                        class="dot dot--on"></span><span class="dot dot--on"></span><span
+                                        class="dot"></span>
                                 </div>
                             </div>
                             <div class="lang-card">
-                                <div class="lang-card__top"><span class="lang-card__name">Amazigh</span><span>🇲🇦</span></div>
+                                <div class="lang-card__top"><span
+                                        class="lang-card__name">Amazigh</span><span>🇲🇦</span></div>
                                 <span class="lang-card__level">Langue maternelle</span>
                                 <div class="lang-card__dots">
-                                    <span class="dot dot--on"></span><span class="dot dot--on"></span><span class="dot dot--on"></span><span class="dot dot--on"></span><span class="dot dot--on"></span>
+                                    <span class="dot dot--on"></span><span class="dot dot--on"></span><span
+                                        class="dot dot--on"></span><span class="dot dot--on"></span><span
+                                        class="dot dot--on"></span>
                                 </div>
                             </div>
                         </div>
@@ -264,6 +348,11 @@
 
         <!-- ═══ PROJETS ═══ -->
         <section id="projets" class="section projects">
+            <i class="fab fa-react floating-icon" style="top: 15%; left: 10%;"></i>
+            <i class="fab fa-node-js floating-icon floating-icon--alt" style="bottom: 25%; right: 5%;"></i>
+            <i class="fas fa-server floating-icon" style="top: 60%; left: 8%;"></i>
+            <i class="fas fa-code floating-icon floating-icon--slow" style="bottom: 10%; left: 20%;"></i>
+
             <div class="container">
                 <header class="section-header" data-reveal>
                     <div class="section-label">
@@ -277,11 +366,12 @@
 
                 <div class="projects__grid">
 
-                    <article class="project-card" data-reveal>
+                    <article class="project-card glare-wrap" data-reveal="skew">
                         <span class="project-card__num">01</span>
                         <div class="project-card__icon"><i class="fas fa-industry"></i></div>
                         <h3 class="project-card__title">Système de Gestion d'Usine</h3>
-                        <p class="project-card__desc">Application complète pour la gestion des produits finis, matières premières et stocks. Suivi de production et rapports analytiques en temps réel.</p>
+                        <p class="project-card__desc">Application complète pour la gestion des produits finis, matières
+                            premières et stocks. Suivi de production et rapports analytiques en temps réel.</p>
                         <ul class="project-card__tags">
                             <li class="proj-tag">Java SpringBoot</li>
                             <li class="proj-tag">MySQL</li>
@@ -298,11 +388,12 @@
                         </div>
                     </article>
 
-                    <article class="project-card" data-reveal data-delay="1">
+                    <article class="project-card glare-wrap" data-reveal="skew" data-delay="1">
                         <span class="project-card__num">02</span>
                         <div class="project-card__icon"><i class="fas fa-dumbbell"></i></div>
                         <h3 class="project-card__title">Application Fitness</h3>
-                        <p class="project-card__desc">Plateforme interactive pour le suivi des entraînements et objectifs. Système personnalisé avec notifications et historique des performances.</p>
+                        <p class="project-card__desc">Plateforme interactive pour le suivi des entraînements et
+                            objectifs. Système personnalisé avec notifications et historique des performances.</p>
                         <ul class="project-card__tags">
                             <li class="proj-tag">Python</li>
                             <li class="proj-tag">MongoDB</li>
@@ -319,11 +410,12 @@
                         </div>
                     </article>
 
-                    <article class="project-card" data-reveal data-delay="2">
+                    <article class="project-card glare-wrap" data-reveal="skew" data-delay="2">
                         <span class="project-card__num">03</span>
                         <div class="project-card__icon"><i class="fas fa-shopping-cart"></i></div>
                         <h3 class="project-card__title">Plateforme E-commerce</h3>
-                        <p class="project-card__desc">Site e-commerce complet avec gestion des produits, utilisateurs et commandes. Interface intuitive et système de paiement sécurisé.</p>
+                        <p class="project-card__desc">Site e-commerce complet avec gestion des produits, utilisateurs et
+                            commandes. Interface intuitive et système de paiement sécurisé.</p>
                         <ul class="project-card__tags">
                             <li class="proj-tag">JavaScript</li>
                             <li class="proj-tag">PostgreSQL</li>
@@ -340,11 +432,13 @@
                         </div>
                     </article>
 
-                    <article class="project-card" data-reveal data-delay="3">
+                    <article class="project-card glare-wrap" data-reveal="skew" data-delay="3">
                         <span class="project-card__num">04</span>
                         <div class="project-card__icon"><i class="fas fa-car-wash"></i></div>
                         <h3 class="project-card__title">App Web — Rily Go</h3>
-                        <p class="project-card__desc">Application web pour un service de lavage automobile, développée au sein d'une équipe agile en remote. Intégration d'interfaces et gestion de base de données.</p>
+                        <p class="project-card__desc">Application web pour un service de lavage automobile, développée
+                            au sein d'une équipe agile en remote. Intégration d'interfaces et gestion de base de
+                            données.</p>
                         <ul class="project-card__tags">
                             <li class="proj-tag">HTML / CSS</li>
                             <li class="proj-tag">JavaScript</li>
@@ -367,6 +461,10 @@
 
         <!-- ═══ EXPÉRIENCE ═══ -->
         <section id="experience" class="section experience">
+            <i class="fas fa-graduation-cap floating-icon floating-icon--alt" style="top: 10%; left: 5%;"></i>
+            <i class="fas fa-briefcase floating-icon" style="bottom: 20%; right: 10%;"></i>
+            <i class="fas fa-award floating-icon floating-icon--slow" style="top: 40%; right: 5%;"></i>
+
             <div class="container">
                 <header class="section-header" data-reveal>
                     <div class="section-label">
@@ -381,16 +479,33 @@
                 <div class="experience__grid">
 
                     <!-- Col Expériences -->
-                    <div class="timeline" data-reveal>
-                        <h3 class="timeline__col-title"><i class="fas fa-briefcase"></i> Expériences Professionnelles</h3>
+                    <div class="timeline" data-reveal="left">
+                        <h3 class="timeline__col-title"><i class="fas fa-briefcase"></i> Expériences Professionnelles
+                        </h3>
                         <ol class="timeline__list">
+
+                            <li class="timeline__entry">
+                                <div class="timeline__dot"></div>
+                                <time class="timeline__date">28 Mars 2026 – En cours</time>
+                                <div class="timeline__body">
+                                    <h4 class="timeline__title">Développeuse Full Stack (Stage)</h4>
+                                    <p class="timeline__place">HB Development</p>
+                                    <ul class="timeline__tasks">
+                                        <li>Conception et développement de solutions Full Stack</li>
+                                        <li>Participation à l'architecture applicative</li>
+                                        <li>Optimisation et maintenance du code</li>
+                                        <li>Travail collaboratif en environnement technique</li>
+                                    </ul>
+                                </div>
+                            </li>
 
                             <li class="timeline__entry">
                                 <div class="timeline__dot"></div>
                                 <time class="timeline__date">Jan. 2026 – En cours</time>
                                 <div class="timeline__body">
                                     <h4 class="timeline__title">Développeuse Stagiaire</h4>
-                                    <p class="timeline__place">Rily Go <span class="badge badge--remote">Remote</span></p>
+                                    <p class="timeline__place">Rily Go <span class="badge badge--remote">Remote</span>
+                                    </p>
                                     <ul class="timeline__tasks">
                                         <li>Développement d'une application web de lavage automobile</li>
                                         <li>Travail en équipe agile</li>
@@ -432,8 +547,9 @@
                     </div>
 
                     <!-- Col Formations -->
-                    <div class="timeline" data-reveal data-delay="2">
-                        <h3 class="timeline__col-title"><i class="fas fa-graduation-cap"></i> Formations &amp; Certifications</h3>
+                    <div class="timeline" data-reveal="right" data-delay="2">
+                        <h3 class="timeline__col-title"><i class="fas fa-graduation-cap"></i> Formations &amp;
+                            Certifications</h3>
                         <ol class="timeline__list">
 
                             <li class="timeline__entry">
@@ -508,6 +624,10 @@
 
         <!-- ═══ CONTACT ═══ -->
         <section id="contact" class="section contact">
+            <i class="fas fa-envelope floating-icon" style="top: 15%; left: 10%;"></i>
+            <i class="fab fa-linkedin-in floating-icon floating-icon--alt" style="bottom: 25%; right: 5%;"></i>
+            <i class="fas fa-paper-plane floating-icon floating-icon--slow" style="top: 60%; left: 5%;"></i>
+
             <div class="container">
                 <header class="section-header" data-reveal>
                     <div class="section-label">
@@ -526,7 +646,9 @@
                             <span class="avail-badge__dot"></span>
                             <span class="avail-badge__text">Disponible immédiatement</span>
                         </div>
-                        <p class="contact__pitch">Je suis ouverte à toute opportunité d'alternance, de stage ou de collaboration sur des projets ambitieux. Contactez-moi par le formulaire ou via mes réseaux.</p>
+                        <p class="contact__pitch">Je suis ouverte à toute opportunité d'alternance, de stage ou de
+                            collaboration sur des projets ambitieux. Contactez-moi par le formulaire ou via mes réseaux.
+                        </p>
 
                         <nav class="contact-links">
                             <a href="tel:+212765380453" class="contact-link">
@@ -545,7 +667,8 @@
                                 </div>
                                 <i class="fas fa-arrow-right contact-link__arrow"></i>
                             </a>
-                            <a href="https://www.linkedin.com/in/chaymae-ed-dryaf-a5a432317" target="_blank" rel="noopener" class="contact-link">
+                            <a href="https://www.linkedin.com/in/chaymae-ed-dryaf-a5a432317" target="_blank"
+                                rel="noopener" class="contact-link">
                                 <span class="contact-link__icon"><i class="fab fa-linkedin"></i></span>
                                 <div class="contact-link__body">
                                     <span class="contact-link__name">LinkedIn</span>
@@ -573,44 +696,49 @@
                     </div>
 
                     <div class="contact__form-wrap" data-reveal data-delay="2">
-                        <form class="contact-form" id="js-contact-form" action="https://formspree.io/f/mojnqjqy" method="POST" novalidate>
+                        <form class="contact-form" id="js-contact-form" action="https://formspree.io/f/mojnqjqy"
+                            method="POST" novalidate>
                             <div class="form-group">
                                 <label class="form-label" for="cf-name">Nom Complet</label>
-                                <input class="form-control" type="text" id="cf-name" name="name" required autocomplete="name" />
+                                <input class="form-control" type="text" id="cf-name" name="name" required
+                                    autocomplete="name" />
                                 <span class="form-line"></span>
                                 <span class="form-error" role="alert"></span>
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="cf-email">Adresse Email</label>
-                                <input class="form-control" type="email" id="cf-email" name="email" required autocomplete="email" />
+                                <input class="form-control" type="email" id="cf-email" name="email" required
+                                    autocomplete="email" />
                                 <span class="form-line"></span>
                                 <span class="form-error" role="alert"></span>
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="cf-sujet">Sujet</label>
                                 <select class="form-control form-select" id="cf-sujet" name="sujet" required>
-                  <option value="">Sélectionner…</option>
-                  <option value="alternance">Proposition d'alternance</option>
-                  <option value="stage">Proposition de stage</option>
-                  <option value="projet">Projet de développement</option>
-                  <option value="autre">Autre</option>
-                </select>
+                                    <option value="">Sélectionner…</option>
+                                    <option value="alternance">Proposition d'alternance</option>
+                                    <option value="stage">Proposition de stage</option>
+                                    <option value="projet">Projet de développement</option>
+                                    <option value="autre">Autre</option>
+                                </select>
                                 <span class="form-line"></span>
                                 <span class="form-error" role="alert"></span>
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="cf-message">Message</label>
-                                <textarea class="form-control form-textarea" id="cf-message" name="message" rows="4" required minlength="20"></textarea>
+                                <textarea class="form-control form-textarea" id="cf-message" name="message" rows="4"
+                                    required minlength="20"></textarea>
                                 <span class="form-line"></span>
                                 <span class="form-error" role="alert"></span>
                             </div>
                             <button type="submit" class="btn btn--gold btn--submit" id="js-submit-btn">
-                <span class="btn__text">Envoyer le message</span>
-                <span class="btn__icon"><i class="fas fa-paper-plane"></i></span>
-                <span class="btn__loading" hidden><i class="fas fa-circle-notch fa-spin"></i></span>
-              </button>
+                                <span class="btn__text">Envoyer le message</span>
+                                <span class="btn__icon"><i class="fas fa-paper-plane"></i></span>
+                                <span class="btn__loading" hidden><i class="fas fa-circle-notch fa-spin"></i></span>
+                            </button>
                             <div class="form-success" id="js-form-success" hidden>
-                                <i class="fas fa-check-circle"></i> Message envoyé ! Je vous répondrai dans les plus brefs délais.
+                                <i class="fas fa-check-circle"></i> Message envoyé ! Je vous répondrai dans les plus
+                                brefs délais.
                             </div>
                         </form>
                     </div>
@@ -621,16 +749,16 @@
 
     </main>
 
-    <!-- FOOTER -->
+    <!-- ═══ FOOTER ═══ -->
     <footer class="footer">
-        <div class="container footer__inner">
-            <p class="footer__brand">Chaymae <em>ED_DRYAF</em></p>
-            <p class="footer__copy">© 2026 · Tous droits réservés · Passion, Innovation, Excellence</p>
-            <nav class="footer__socials">
-                <a href="https://www.linkedin.com/in/chaymae-ed-dryaf-a5a432317" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/Chaymaeed1" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                <a href="mailto:chaymaeeddryaf@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-            </nav>
+        <div class="container">
+            <span class="footer__logo">Chaymae ED_DRYAF</span>
+            <div class="footer__socials">
+                <a href="https://linkedin.com/in/chaymae-ed-dryaf" target="_blank" class="footer__social"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/Chaymaeed1" target="_blank" class="footer__social"><i class="fab fa-github"></i></a>
+                <a href="mailto:chaymae.eddryaf@gmail.com" class="footer__social"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p class="footer__credits">&copy; 2026 Crafted with Passion by Chaymae ED_DRYAF</p>
         </div>
     </footer>
 
