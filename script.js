@@ -135,6 +135,10 @@ function initTextSplitting() {
             span.innerText = char === ' ' ? '\u00A0' : char;
             span.className = 'char';
             span.style.transitionDelay = `${i * 30}ms`;
+            // Add animation delay for wave effect if it's the hero title
+            if (target.classList.contains('hero__title')) {
+                span.style.animationDelay = `${i * 0.1}s`;
+            }
             target.appendChild(span);
         });
     });
@@ -201,7 +205,7 @@ function initTilt() {
             
             // Resume animation if it's the photo frame
             if (el.classList.contains('photo-frame')) {
-                el.style.animation = 'float 6s ease-in-out infinite';
+                el.style.animation = 'float 8s ease-in-out infinite';
             }
         });
     });
@@ -566,12 +570,12 @@ const translations = {
         project_3_f2: "Panier d'achat",
         project_3_f3: "Système de paiement",
         project_3_f4: "Gestion des commandes",
-        project_4_title: "App Web — Rily Go",
-        project_4_desc: "Application web pour un service de lavage automobile, développée au sein d'une équipe agile en remote. Intégration d'interfaces et gestion de base de données.",
-        project_4_f1: "Développement de fonctionnalités",
-        project_4_f2: "Intégration UI/UX",
-        project_4_f3: "Gestion base de données",
-        project_4_f4: "Méthodologie Agile",
+        project_4_title: "AI Personal Growth Hub",
+        project_4_desc: "Système d’agent IA modulaire évolutif combinant coaching de carrière, aide à l’apprentissage, génération de startups et gestion de productivité avec mémoire long terme.",
+        project_4_f1: "Agent IA avec routage intelligent",
+        project_4_f2: "Analyse de carrière & CV",
+        project_4_f3: "Générateur & Validateur d'idées",
+        project_4_f4: "Système de mémoire long terme (RAG)",
         section_exp_title: "Parcours <em>Professionnel</em>",
         section_exp_subtitle: "Expériences et formations qui ont forgé mon expertise",
         exp_col_1: "Expériences Professionnelles",
@@ -675,12 +679,12 @@ const translations = {
         project_3_f2: "Shopping cart",
         project_3_f3: "Payment system",
         project_3_f4: "Order management",
-        project_4_title: "Web App — Rily Go",
-        project_4_desc: "Web application for a car wash service, developed within a remote agile team. UI integration and database management.",
-        project_4_f1: "Feature development",
-        project_4_f2: "UI/UX integration",
-        project_4_f3: "Database management",
-        project_4_f4: "Agile methodology",
+        project_4_title: "AI Personal Growth Hub",
+        project_4_desc: "Scalable modular AI agent system combining career coaching, learning assistance, startup generation, and productivity management with long-term memory.",
+        project_4_f1: "AI Agent with smart routing",
+        project_4_f2: "Career & CV Analysis",
+        project_4_f3: "Idea Generator & Validator",
+        project_4_f4: "Long-term memory system (RAG)",
         section_exp_title: "Professional <em>Path</em>",
         section_exp_subtitle: "Experiences and training that forged my expertise",
         exp_col_1: "Professional Experiences",

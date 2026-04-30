@@ -226,10 +226,17 @@ em {
 }
 
 .nav__logo-text {
-    font-family: var(--ff-serif);
-    font-size: 1.5rem;
+    font-family: var(--ff-heading);
+    font-size: 1.2rem;
     font-weight: 600;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.02em;
+    color: var(--clr-text-main);
+    animation: textNudge 5s ease-in-out infinite;
+}
+
+@keyframes textNudge {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(3px); }
 }
 
 .nav__links {
@@ -317,13 +324,24 @@ em {
     font-weight: 500;
     font-size: 0.9rem;
     cursor: pointer;
-    border: none;
+}
+
+.hero__title .char {
+    display: inline-block;
     transition: var(--tr-smooth);
+    animation: charFloat 4s ease-in-out infinite;
+}
+
+@keyframes charFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
 }
 
 .btn--primary {
     background-color: var(--clr-primary);
     color: var(--clr-light);
+    border: none;
+    transition: var(--tr-smooth);
 }
 
 .btn--primary:hover {
@@ -522,7 +540,8 @@ em {
     border: 10px solid var(--clr-light);
     box-shadow: var(--sh-hard);
     transition: var(--tr-smooth);
-    animation: float 6s ease-in-out infinite;
+    animation: float 8s ease-in-out infinite;
+    transform-style: preserve-3d;
 }
 
 .photo-frame__img {
@@ -609,8 +628,18 @@ em {
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(2deg); }
+    0%, 100% { 
+        transform: perspective(1000px) translateY(0) rotateX(0deg) rotateY(0deg); 
+    }
+    25% { 
+        transform: perspective(1000px) translateY(-15px) rotateX(4deg) rotateY(-4deg); 
+    }
+    50% { 
+        transform: perspective(1000px) translateY(-5px) rotateX(-2deg) rotateY(6deg); 
+    }
+    75% { 
+        transform: perspective(1000px) translateY(-20px) rotateX(3deg) rotateY(-3deg); 
+    }
 }
 
 .scroll-hint {
