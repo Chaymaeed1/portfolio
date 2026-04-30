@@ -5,6 +5,8 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     initLoader();
+    initTheme();
+    initI18n();
     initCursor();
     initTextSplitting();
     initReveal();
@@ -21,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initBackToTop();
     initTechBackground();
     initMobileMenu();
-    initTyped();
     initCodeFragments();
 });
 
@@ -124,7 +125,10 @@ function initLighting() {
 function initTextSplitting() {
     const targets = document.querySelectorAll('.section-title, .hero__title');
     targets.forEach(target => {
-        const text = target.innerText;
+        const text = target.getAttribute('data-original-text') || target.innerText;
+        if (!target.hasAttribute('data-original-text')) {
+            target.setAttribute('data-original-text', text);
+        }
         target.innerHTML = '';
         text.split('').forEach((char, i) => {
             const span = document.createElement('span');
@@ -184,10 +188,21 @@ function initTilt() {
             const centerY = rect.height / 2;
             const rotateX = (y - centerY) / 10;
             const rotateY = (centerX - x) / 10;
+            
+            // Pause animation if it's the photo frame to avoid conflicts
+            if (el.classList.contains('photo-frame')) {
+                el.style.animation = 'none';
+            }
+            
             el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
         });
         el.addEventListener('mouseleave', () => {
             el.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
+            
+            // Resume animation if it's the photo frame
+            if (el.classList.contains('photo-frame')) {
+                el.style.animation = 'float 6s ease-in-out infinite';
+            }
         });
     });
 }
@@ -476,6 +491,328 @@ function initContactForm() {
     });
 }
 
+/* ── THEME SYSTEM ── */
+function initTheme() {
+    const toggle = document.getElementById('js-theme-toggle');
+    const body = document.body;
+    const icon = toggle.querySelector('i');
+
+    const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
+    body.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+
+    toggle.addEventListener('click', () => {
+        const currentTheme = body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('portfolio-theme', newTheme);
+        updateThemeIcon(newTheme);
+    });
+
+    function updateThemeIcon(theme) {
+        if (theme === 'dark') {
+            icon.className = 'fas fa-sun';
+        } else {
+            icon.className = 'fas fa-moon';
+        }
+    }
+}
+
+/* ── I18N SYSTEM ── */
+const translations = {
+    fr: {
+        nav_home: "Accueil",
+        nav_skills: "Compétences",
+        nav_projects: "Projets",
+        nav_path: "Parcours",
+        nav_contact: "Contact",
+        nav_cv: "CV",
+        hero_eyebrow_1: "Développeuse Full Stack",
+        hero_eyebrow_2: "Disponible",
+        hero_bio: "<strong>Développeuse Full Stack</strong> spécialisée dans la création d’applications web performantes et intelligentes. J’accompagne entreprises et porteurs de projets dans la conception de solutions digitales modernes, en combinant développement full stack, architecture évolutive et intégration de fonctionnalités basées sur <strong>L’Intelligence Artificielle</strong>. Orientée résultats et innovation, je transforme des idées en produits digitaux à forte valeur ajoutée.",
+        hero_cta_contact: "Me contacter",
+        hero_cta_projects: "Voir les projets",
+        hero_stat_projects: "Projets clés",
+        hero_stat_exp: "Expériences",
+        hero_stat_lang: "Langues",
+        hero_status: "<span class='status-dot'></span>Disponible · Tétouan, Maroc",
+        section_skills_title: "Mes <em>Expertises</em>",
+        section_skills_subtitle: "Un profil technique complet alliant maîtrise du code, des bases de données et des soft skills essentiels.",
+        skill_group_1: "Langages & Frameworks",
+        skill_group_2: "Bases de Données",
+        skill_group_3: "Outils & DevOps",
+        skill_group_4: "Modélisation & Analyse",
+        skill_group_soft: "Soft Skills",
+        skill_lang: "Langues",
+        section_projects_title: "Projets <em>Clés</em>",
+        section_projects_subtitle: "Réalisations concrètes démontrant mes compétences en développement",
+        project_features: "Fonctionnalités",
+        project_1_title: "Système de Gestion d'Usine",
+        project_1_desc: "Application complète pour la gestion des produits finis, matières premières et stocks. Suivi de production et rapports analytiques en temps réel.",
+        project_1_f1: "Gestion des stocks automatisée",
+        project_1_f2: "Suivi de production en temps réel",
+        project_1_f3: "Rapports analytiques",
+        project_1_f4: "Interface administrateur complète",
+        project_2_title: "Application Fitness",
+        project_2_desc: "Plateforme interactive pour le suivi des entraînements et objectifs. Système personnalisé avec notifications et historique des performances.",
+        project_2_f1: "Programmes d'entraînement personnalisés",
+        project_2_f2: "Suivi des performances",
+        project_2_f3: "Notifications et rappels",
+        project_2_f4: "Historique complet",
+        project_3_title: "Plateforme E-commerce",
+        project_3_desc: "Site e-commerce complet avec gestion des produits, utilisateurs et commandes. Interface intuitive et système de paiement sécurisé.",
+        project_3_f1: "Catalogue produits dynamique",
+        project_3_f2: "Panier d'achat",
+        project_3_f3: "Système de paiement",
+        project_3_f4: "Gestion des commandes",
+        project_4_title: "App Web — Rily Go",
+        project_4_desc: "Application web pour un service de lavage automobile, développée au sein d'une équipe agile en remote. Intégration d'interfaces et gestion de base de données.",
+        project_4_f1: "Développement de fonctionnalités",
+        project_4_f2: "Intégration UI/UX",
+        project_4_f3: "Gestion base de données",
+        project_4_f4: "Méthodologie Agile",
+        section_exp_title: "Parcours <em>Professionnel</em>",
+        section_exp_subtitle: "Expériences et formations qui ont forgé mon expertise",
+        exp_col_1: "Expériences Professionnelles",
+        exp_col_2: "Formations & Certifications",
+        exp_1_t1: "Conception et développement de solutions Full Stack",
+        exp_1_t2: "Participation à l'architecture applicative",
+        exp_1_t3: "Optimisation et maintenance du code",
+        exp_1_t4: "Travail collaboratif en environnement technique",
+        exp_2_t1: "Développement d'une application web de lavage automobile",
+        exp_2_t2: "Travail en équipe agile",
+        exp_2_t3: "Intégration d'interfaces utilisateur",
+        exp_2_t4: "Contribution à la gestion de la base de données",
+        exp_3_t1: "Développement d'un site web interne pour la gestion des services",
+        exp_3_t2: "Mise à jour des procédures IT",
+        exp_3_t3: "Optimisation des processus numériques",
+        exp_4_t1: "Organisation des archives via Excel",
+        exp_4_t2: "Installation et mise à jour d'applications internes",
+        exp_4_t3: "Support technique aux utilisateurs",
+        section_contact_title: "Travaillons <em>Ensemble</em>",
+        section_contact_subtitle: "À la recherche active d'une alternance ou d'un stage en développement.",
+        contact_avail: "Disponible immédiatement",
+        contact_pitch: "Je suis ouverte à toute opportunité d'alternance, de stage ou de collaboration sur des projets ambitieux. Contactez-moi par le formulaire ou via mes réseaux.",
+        form_name: "Nom Complet",
+        form_email: "Adresse Email",
+        form_subject: "Sujet",
+        form_subject_opt_0: "Sélectionner…",
+        form_subject_opt_1: "Proposition d'alternance",
+        form_subject_opt_2: "Proposition de stage",
+        form_subject_opt_3: "Projet de développement",
+        form_subject_opt_4: "Autre",
+        form_message: "Message",
+        form_submit: "Envoyer le message",
+        form_success: "<i class='fas fa-check-circle'></i> Message envoyé ! Je vous répondrai dans les plus brefs délais.",
+        footer_credits: "&copy; 2026 Crafted with Passion by Chaymae ED_DRYAF",
+        soft_1_name: "Travail d'équipe",
+        soft_1_desc: "Collaboration & communication claire",
+        soft_2_name: "Leadership",
+        soft_2_desc: "Prise d'initiative & responsabilité",
+        soft_3_name: "Gestion de projets",
+        soft_3_desc: "Organisation & planification efficace",
+        soft_4_name: "Résolution de problèmes",
+        soft_4_desc: "Esprit analytique & adaptabilité",
+        soft_5_name: "Apprentissage continu",
+        soft_5_desc: "Curiosité & développement personnel",
+        lang_1_name: "Arabe",
+        lang_2_name: "Français",
+        lang_3_name: "Anglais",
+        lang_4_name: "Amazigh",
+        lang_level_native: "Langue maternelle",
+        lang_level_fluent: "Courant",
+        contact_phone: "Téléphone",
+        contact_email: "Email",
+        contact_linkedin: "LinkedIn",
+        contact_github: "GitHub",
+        contact_cv_download: "Télécharger le CV",
+        contact_cv_desc: "CV complet au format PDF",
+        typed_words: ["Spécialiste Java Spring Boot", "Experte Angular & Frontend", "Passionnée d'Architectures Web", "Créatrice de Solutions Innovantes"]
+    },
+    en: {
+        nav_home: "Home",
+        nav_skills: "Skills",
+        nav_projects: "Projects",
+        nav_path: "Path",
+        nav_contact: "Contact",
+        nav_cv: "Resume",
+        hero_eyebrow_1: "Full Stack Developer",
+        hero_eyebrow_2: "Available",
+        hero_bio: "<strong>Full Stack Developer</strong> specializing in creating high-performance and intelligent web applications. I support companies and project owners in the design of modern digital solutions, combining full stack development, scalable architecture, and integration of features based on <strong>Artificial Intelligence</strong>. Results-oriented and innovative, I transform ideas into high-value digital products.",
+        hero_cta_contact: "Contact Me",
+        hero_cta_projects: "View Projects",
+        hero_stat_projects: "Key Projects",
+        hero_stat_exp: "Experiences",
+        hero_stat_lang: "Languages",
+        hero_status: "<span class='status-dot'></span>Available · Tetouan, Morocco",
+        section_skills_title: "My <em>Expertise</em>",
+        section_skills_subtitle: "A complete technical profile combining mastery of code, databases, and essential soft skills.",
+        skill_group_1: "Languages & Frameworks",
+        skill_group_2: "Databases",
+        skill_group_3: "Tools & DevOps",
+        skill_group_4: "Modeling & Analysis",
+        skill_group_soft: "Soft Skills",
+        skill_lang: "Languages",
+        section_projects_title: "Key <em>Projects</em>",
+        section_projects_subtitle: "Concrete achievements demonstrating my development skills",
+        project_features: "Features",
+        project_1_title: "Factory Management System",
+        project_1_desc: "Complete application for managing finished products, raw materials, and stocks. Production tracking and real-time analytical reports.",
+        project_1_f1: "Automated stock management",
+        project_1_f2: "Real-time production tracking",
+        project_1_f3: "Analytical reports",
+        project_1_f4: "Full admin interface",
+        project_2_title: "Fitness Application",
+        project_2_desc: "Interactive platform for tracking workouts and goals. Personalized system with notifications and performance history.",
+        project_2_f1: "Personalized training programs",
+        project_2_f2: "Performance tracking",
+        project_2_f3: "Notifications and reminders",
+        project_2_f4: "Full history",
+        project_3_title: "E-commerce Platform",
+        project_3_desc: "Full e-commerce site with product, user, and order management. Intuitive interface and secure payment system.",
+        project_3_f1: "Dynamic product catalog",
+        project_3_f2: "Shopping cart",
+        project_3_f3: "Payment system",
+        project_3_f4: "Order management",
+        project_4_title: "Web App — Rily Go",
+        project_4_desc: "Web application for a car wash service, developed within a remote agile team. UI integration and database management.",
+        project_4_f1: "Feature development",
+        project_4_f2: "UI/UX integration",
+        project_4_f3: "Database management",
+        project_4_f4: "Agile methodology",
+        section_exp_title: "Professional <em>Path</em>",
+        section_exp_subtitle: "Experiences and training that forged my expertise",
+        exp_col_1: "Professional Experiences",
+        exp_col_2: "Training & Certifications",
+        exp_1_t1: "Design and development of Full Stack solutions",
+        exp_1_t2: "Participation in application architecture",
+        exp_1_t3: "Code optimization and maintenance",
+        exp_1_t4: "Collaborative work in a technical environment",
+        exp_2_t1: "Development of a car wash web application",
+        exp_2_t2: "Agile teamwork",
+        exp_2_t3: "User interface integration",
+        exp_2_t4: "Contribution to database management",
+        exp_3_t1: "Development of an internal website for service management",
+        exp_3_t2: "Updating IT procedures",
+        exp_3_t3: "Digital process optimization",
+        exp_4_t1: "Archive organization via Excel",
+        exp_4_t2: "Installation and updating of internal applications",
+        exp_4_t3: "Technical support to users",
+        section_contact_title: "Let's Work <em>Together</em>",
+        section_contact_subtitle: "Actively looking for an apprenticeship or a development internship.",
+        contact_avail: "Immediately available",
+        contact_pitch: "I am open to any apprenticeship, internship, or collaboration opportunity on ambitious projects. Contact me via the form or my networks.",
+        form_name: "Full Name",
+        form_email: "Email Address",
+        form_subject: "Subject",
+        form_subject_opt_0: "Select…",
+        form_subject_opt_1: "Apprenticeship proposal",
+        form_subject_opt_2: "Internship proposal",
+        form_subject_opt_3: "Development project",
+        form_subject_opt_4: "Other",
+        form_message: "Message",
+        form_submit: "Send Message",
+        form_success: "<i class='fas fa-check-circle'></i> Message sent! I will respond to you as soon as possible.",
+        footer_credits: "&copy; 2026 Crafted with Passion by Chaymae ED_DRYAF",
+        soft_1_name: "Teamwork",
+        soft_1_desc: "Clear collaboration & communication",
+        soft_2_name: "Leadership",
+        soft_2_desc: "Initiative taking & responsibility",
+        soft_3_name: "Project Management",
+        soft_3_desc: "Effective organization & planning",
+        soft_4_name: "Problem Solving",
+        soft_4_desc: "Analytical mind & adaptability",
+        soft_5_name: "Continuous Learning",
+        soft_5_desc: "Curiosity & personal development",
+        lang_1_name: "Arabic",
+        lang_2_name: "French",
+        lang_3_name: "English",
+        lang_4_name: "Amazigh",
+        lang_level_native: "Native speaker",
+        lang_level_fluent: "Fluent",
+        contact_phone: "Phone",
+        contact_email: "Email",
+        contact_linkedin: "LinkedIn",
+        contact_github: "GitHub",
+        contact_cv_download: "Download Resume",
+        contact_cv_desc: "Full Resume in PDF format",
+        typed_words: ["Java Spring Boot Specialist", "Angular & Frontend Expert", "Passionate about Web Architectures", "Creator of Innovative Solutions"]
+    }
+};
+
+let currentLang = 'fr';
+let typedInstance = null;
+
+function initI18n() {
+    const toggle = document.getElementById('js-lang-toggle');
+    currentLang = localStorage.getItem('portfolio-lang') || 'fr';
+    
+    updateLanguage();
+
+    toggle.addEventListener('click', () => {
+        currentLang = currentLang === 'fr' ? 'en' : 'fr';
+        localStorage.setItem('portfolio-lang', currentLang);
+        updateLanguage();
+        
+        // Re-init typed with new language
+        if (typedInstance) clearTimeout(typedInstance);
+        initTyped();
+        
+        // Re-init text splitting for section titles
+        initTextSplitting();
+    });
+}
+
+function updateLanguage() {
+    const toggle = document.getElementById('js-lang-toggle');
+    toggle.innerText = currentLang === 'fr' ? 'EN' : 'FR';
+    
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[currentLang][key]) {
+            el.innerHTML = translations[currentLang][key];
+        }
+    });
+    
+    // Update HTML lang attribute
+    document.documentElement.lang = currentLang;
+}
+
+/* ── TYPED EFFECT ── */
+function initTyped() {
+    const target = document.getElementById('js-typed');
+    if (!target) return;
+    
+    const words = translations[currentLang].typed_words;
+    let wordIdx = 0, charIdx = 0, isDeleting = false, speed = 100;
+    
+    function type() {
+        const currentWord = words[wordIdx];
+        if (isDeleting) {
+            target.textContent = currentWord.substring(0, charIdx - 1);
+            charIdx--;
+            speed = 50;
+        } else {
+            target.textContent = currentWord.substring(0, charIdx + 1);
+            charIdx++;
+            speed = 100;
+        }
+        
+        if (!isDeleting && charIdx === currentWord.length) {
+            isDeleting = true;
+            speed = 2000;
+        } else if (isDeleting && charIdx === 0) {
+            isDeleting = false;
+            wordIdx = (wordIdx + 1) % words.length;
+            speed = 500;
+        }
+        
+        typedInstance = setTimeout(type, speed);
+    }
+    type();
+}
+
 /* ── SMOOTH SCROLL ── */
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -491,3 +828,4 @@ function initSmoothScroll() {
         });
     });
 }
+
